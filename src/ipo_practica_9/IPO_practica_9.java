@@ -5,6 +5,7 @@
  */
 package ipo_practica_9;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
@@ -52,9 +53,10 @@ public class IPO_practica_9 {
         jMenuBar1.add(jMenu2);
         frame.setJMenuBar(jMenuBar1);
         
-        frame.add(inicio);
+        frame.add(inicio, BorderLayout.PAGE_START);
 
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
