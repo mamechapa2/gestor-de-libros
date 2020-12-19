@@ -45,6 +45,7 @@ public class Lista extends JPanel
     private JButton eliminarButton;
     private JTextField campoTexto;
     private JFrame frame;
+    private JPanel buttonPane;
 
     private Vector<Libro> libros;
 
@@ -85,7 +86,7 @@ public class Lista extends JPanel
         String nombre = listModel.getElementAt(list.getSelectedIndex()).toString();
 
         //Create a panel that uses BoxLayout.
-        JPanel buttonPane = new JPanel();
+        buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.add(eliminarButton);
         buttonPane.add(editButton);
@@ -102,9 +103,9 @@ public class Lista extends JPanel
     }
 
     public void volver() {
-        frame.setContentPane(this);
+        setVisible(true);
+        buttonPane.setVisible(true);
         frame.pack();
-        frame.setVisible(true);
     }
 
     class MouseListener extends MouseAdapter {
@@ -119,16 +120,17 @@ public class Lista extends JPanel
         public void mouseClicked(MouseEvent evt) {
             if (evt.getClickCount() == 2) {
                 list.setVisible(false);
+                buttonPane.setVisible(false);
                 int index = list.getSelectedIndex();
+                buttonPane.setVisible(false);
                 list.setVisible(false);
                 list.setSelectedIndex(index);
                 list.ensureIndexIsVisible(index);
                 JComponent panelEdicion = new Edicion(frame, lista, libros.get(index));
-                panelEdicion.setOpaque(true);
+                frame.add(panelEdicion);
+                panelEdicion.setVisible(true);
 
-                frame.setContentPane(panelEdicion);
                 frame.pack();
-                frame.setVisible(true);
             }
         }
     }
@@ -144,16 +146,17 @@ public class Lista extends JPanel
         @Override
         public void actionPerformed(ActionEvent e) {
             list.setVisible(false);
+            buttonPane.setVisible(false);
             int index = list.getSelectedIndex();
+            buttonPane.setVisible(false);
             list.setVisible(false);
             list.setSelectedIndex(index);
             list.ensureIndexIsVisible(index);
             JComponent panelEdicion = new Edicion(frame, lista, libros.get(index));
-            panelEdicion.setOpaque(true);
+            frame.add(panelEdicion);
+            panelEdicion.setVisible(true);
 
-            frame.setContentPane(panelEdicion);
             frame.pack();
-            frame.setVisible(true);
         }
 
     }

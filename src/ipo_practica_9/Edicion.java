@@ -5,6 +5,7 @@
  */
 package ipo_practica_9;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -14,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 /**
@@ -40,7 +42,9 @@ public class Edicion extends JPanel {
         this.frame = frame;
         this.libro = libro;
         this.pantallaAnterior = pantallaAnterior;
+        JPanel panelScroll = new JPanel();
 
+        
         //Inicializacion jlabel
         JLabel nombre = new JLabel("Nombre");
         JLabel autor = new JLabel("Autor");
@@ -60,16 +64,19 @@ public class Edicion extends JPanel {
 
         //Añadimos al panel
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        add(nombre);
-        add(nombreLibro);
-        add(autor);
-        add(autorLibro);
-        add(genero);
-        add(generoLibro);
-        add(anio);
-        add(anioLibro);
-        add(save);
-//        setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        panelScroll.add(nombre);
+        panelScroll.add(nombreLibro);
+        panelScroll.add(autor);
+        panelScroll.add(autorLibro);
+        panelScroll.add(genero);
+        panelScroll.add(generoLibro);
+        panelScroll.add(anio);
+        panelScroll.add(anioLibro);
+        panelScroll.add(save);      
+        panelScroll.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        
+        JScrollPane scrollPane = new JScrollPane(panelScroll);
+        add(scrollPane);
     }
 
     /**
@@ -104,6 +111,7 @@ public class Edicion extends JPanel {
             libro.setNombre(nombreLibro.getText());
             libro.setAño(anioLibro.getText());
             libro.setGenero(generoLibro.getText());
+            setVisible(false);
 
             pantallaAnterior.volver();
         }

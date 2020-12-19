@@ -57,8 +57,7 @@ public class IPO_practica_9 {
 
         //Create and set up the content pane.
         JComponent lista = new Lista(frame, librosEjemplo);
-        lista.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(lista);
+        frame.add(lista);
 
         //Display the window.
         frame.pack();
