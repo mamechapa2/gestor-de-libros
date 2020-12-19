@@ -33,8 +33,8 @@ public class Inicio extends javax.swing.JPanel {
     public Inicio(JFrame framePadre) {
         initComponents();
         
-        framePadre = framePadre;
-        vectorLibros = new Vector<>();
+        this.framePadre = framePadre;
+        this.vectorLibros = new Vector<>();
 
         this.listModel = new DefaultListModel();
         addLibrosEjemplo();
@@ -49,14 +49,19 @@ public class Inicio extends javax.swing.JPanel {
     }
     
     private void addLibrosEjemplo(){
-        vectorLibros.add(new Libro("La chica de nieve", "Javier Castillo", "Thriller", 2020));
-        vectorLibros.add(new Libro("La chica de nieve2", "Javier Castillo", "Thriller", 2020));
-        vectorLibros.add(new Libro("La chica de nieve3", "Javier Castillo", "Thriller", 2020));
-        vectorLibros.add(new Libro("La chica de nieve4", "Javier Castillo", "Thriller", 2020));
+        vectorLibros.add(new Libro("La chica de nieve", "Javier Castillo", "Thriller", "2020"));
+        vectorLibros.add(new Libro("Marina", "Carlos Ruiz Zafon", "Thriller", "nosexd"));
+        vectorLibros.add(new Libro("La pareja de al lado", "Shari Lapena", "Thriller", "xd"));
+        vectorLibros.add(new Libro("Tierra", "Eloy Moreno", "Thriller", "2020"));
         
-        for (Libro vectorLibro : vectorLibros) {
-            listModel.addElement(vectorLibro.getNombre() + " | " + vectorLibro.getAutor());
+        for (Libro libro : vectorLibros) {
+            listModel.addElement(libro.getNombre() + " | " + libro.getAutor());
         }
+    }
+    
+    public void guardarLibro(Libro libro){
+        vectorLibros.add(libro);
+        listModel.addElement(libro.getNombre() + " | " + libro.getAutor());
     }
 
     /**
@@ -122,10 +127,10 @@ public class Inicio extends javax.swing.JPanel {
 
     class MouseListener extends MouseAdapter {
 
-        JPanel lista;
+        Inicio inicio;
 
-        public MouseListener(JPanel JPanel) {
-            this.lista = JPanel;
+        public MouseListener(Inicio JPanel) {
+            this.inicio = JPanel;
         }
 
         @Override
@@ -135,12 +140,14 @@ public class Inicio extends javax.swing.JPanel {
                 list.setSelectedIndex(elementoSeleccionado);
                 list.ensureIndexIsVisible(elementoSeleccionado);
                 
-                Edicion edicion = new Edicion(lista, vectorLibros.get(elementoSeleccionado));
+                Edicion edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado));
+                vectorLibros.remove(elementoSeleccionado);
+                listModel.remove(elementoSeleccionado);
                 
                 framePadre.add(edicion, BorderLayout.PAGE_START);
                 framePadre.pack();
                 edicion.setVisible(true);
-                lista.setVisible(false);
+                inicio.setVisible(false);
             }
         }
     }

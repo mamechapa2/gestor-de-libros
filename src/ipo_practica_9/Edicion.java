@@ -15,15 +15,32 @@ import javax.swing.JPanel;
  */
 public class Edicion extends javax.swing.JPanel {
 
-    private JPanel panelAnterior;
+    private Inicio panelAnterior;
+    private Libro libro;
     /**
      * Creates new form Edicion
      */
-    public Edicion(JPanel panelAnterior, Libro libro) {
+    public Edicion(Inicio panelAnterior, Libro libro) {
         initComponents();
         this.panelAnterior = panelAnterior;
+        this.libro = libro;
+        
+        jTextFieldNombre.setText(libro.getNombre());
+        jTextFieldAutor.setText(libro.getAutor());
+        jTextFieldGenero.setText(libro.getGenero());
+        jTextFieldAnio.setText(libro.getAño());
+        
+                
         
         saveButton.addActionListener(new SaveListener(this));
+    }
+    
+    public void guardarLibro(){
+        libro.setNombre(jTextFieldNombre.getText());
+        libro.setAutor(jTextFieldAutor.getText());
+        libro.setGenero(jTextFieldGenero.getText());
+        libro.setAño(jTextFieldAnio.getText());
+        panelAnterior.guardarLibro(libro);
     }
 
     /**
@@ -133,12 +150,9 @@ public class Edicion extends javax.swing.JPanel {
         }
         
         public void actionPerformed(ActionEvent e) {
+            panelEdicion.guardarLibro();
             panelEdicion.setVisible(false);
             panelAnterior.setVisible(true);
-        }
-        
-        private void guardarLibro(){
-            
         }
     }
 }

@@ -13,9 +13,9 @@ public class Libro {
     private String nombre;
     private String autor;
     private String genero;
-    private Integer año;
+    private String año;
 
-    public Libro(String nombre, String autor, String genero, Integer año) {
+    public Libro(String nombre, String autor, String genero, String año) {
         this.nombre = nombre;
         this.autor = autor;
         this.genero = genero;
@@ -34,7 +34,7 @@ public class Libro {
         this.genero = genero;
     }
 
-    public void setAño(Integer año) {
+    public void setAño(String año) {
         this.año = año;
     }
 
@@ -50,7 +50,7 @@ public class Libro {
         return genero;
     }
 
-    public Integer getAño() {
+    public String getAño() {
         return año;
     }
 }
