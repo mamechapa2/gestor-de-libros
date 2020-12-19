@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -26,6 +25,8 @@ public class Inicio extends javax.swing.JPanel {
     private JFrame framePadre;
 
     private DefaultListModel listModel;
+    
+    Vector<String> idioma;
 
     private Vector<Libro> vectorLibros;
     private Libro libroAnterior;
@@ -33,11 +34,13 @@ public class Inicio extends javax.swing.JPanel {
     /**
      * Creates new form Inicio
      */
-    public Inicio(JFrame framePadre) {
+    public Inicio(JFrame framePadre, Vector<String> idioma) {
         initComponents();
 
         this.framePadre = framePadre;
         this.vectorLibros = new Vector<>();
+        this.idioma = idioma;
+        cambiarIdioma();
 
         this.listModel = new DefaultListModel();
         addLibrosEjemplo();
@@ -72,6 +75,16 @@ public class Inicio extends javax.swing.JPanel {
         vectorLibros.add(libroAnterior);
         listModel.addElement(libroAnterior.getNombre() + " | " + libroAnterior.getAutor());
     }
+    
+    public void cambiarIdioma(){
+        addButton.setText(idioma.get(5));
+        deleteButton.setText(idioma.get(6));
+    }
+    
+    public void setIdioma(Vector<String> idioma){
+        this.idioma = idioma;
+        cambiarIdioma();
+    }
 
     class MouseListener extends MouseAdapter {
 
@@ -88,7 +101,7 @@ public class Inicio extends javax.swing.JPanel {
                 list.setSelectedIndex(elementoSeleccionado);
                 list.ensureIndexIsVisible(elementoSeleccionado);
 
-                Edicion edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado));
+                Edicion edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado), idioma);
                 libroAnterior = vectorLibros.get(elementoSeleccionado);
                 vectorLibros.remove(elementoSeleccionado);
                 listModel.remove(elementoSeleccionado);
@@ -111,7 +124,7 @@ public class Inicio extends javax.swing.JPanel {
 
         public void actionPerformed(ActionEvent e) {
             Libro libro = new Libro();
-            Nuevo nuevo = new Nuevo(inicio, libro);
+            Nuevo nuevo = new Nuevo(inicio, libro, idioma);
 
             framePadre.add(nuevo, BorderLayout.PAGE_START);
             framePadre.pack();

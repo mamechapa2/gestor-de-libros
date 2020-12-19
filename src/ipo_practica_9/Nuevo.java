@@ -7,7 +7,7 @@ package ipo_practica_9;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JPanel;
+import java.util.Vector;
 
 /**
  *
@@ -17,14 +17,18 @@ public class Nuevo extends javax.swing.JPanel {
 
     private Inicio panelAnterior;
     private Libro libro;
+    
+    private Vector<String> idioma;
 
     /**
      * Creates new form Edicion
      */
-    public Nuevo(Inicio panelAnterior, Libro libro) {
+    public Nuevo(Inicio panelAnterior, Libro libro, Vector<String> idioma) {
         initComponents();
         this.panelAnterior = panelAnterior;
         this.libro = libro;
+        this.idioma = idioma;
+        cambiarIdioma();
 
         jTextFieldNombre.setText("");
         jTextFieldAutor.setText("");
@@ -41,6 +45,13 @@ public class Nuevo extends javax.swing.JPanel {
         libro.setGenero(jTextFieldGenero.getText());
         libro.setAño(jTextFieldAnio.getText());
         panelAnterior.guardarLibro(libro);
+    }
+    
+    public void cambiarIdioma(){
+        jLabelNombre.setText(idioma.get(7));
+        jLabelAutor.setText(idioma.get(8));
+        jLabelGenero.setText(idioma.get(9));
+        jLabelAnio.setText(idioma.get(10));
     }
 
     /**

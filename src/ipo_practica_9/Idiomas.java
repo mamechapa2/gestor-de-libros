@@ -18,6 +18,7 @@ import java.util.Vector;
 public class Idiomas {
     
     private Vector<Vector<String>> idiomas;
+    private int numIdiomas;
 
     public Idiomas(String fichero) throws FileNotFoundException, IOException {
         FileReader f = null;
@@ -26,7 +27,7 @@ public class Idiomas {
         f = new FileReader(fichero);
         BufferedReader b = new BufferedReader(f);
         
-        int numIdiomas = Integer.parseInt(b.readLine());
+        numIdiomas = Integer.parseInt(b.readLine());
         idiomas = new Vector<>();
         for (int i = 0; i < numIdiomas; i++) {
             Vector<String> idioma = new Vector<>();
@@ -51,6 +52,10 @@ public class Idiomas {
     
     public Vector<String> getIdioma(int cual) {
         return idiomas.get(cual);
+    }
+    
+    public int getNumIdiomas() {
+        return numIdiomas;
     }
 
 }
