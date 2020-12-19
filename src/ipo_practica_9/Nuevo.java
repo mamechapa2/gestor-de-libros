@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  *
  * @author mamechapa
  */
-public class Edicion extends javax.swing.JPanel {
+public class Nuevo extends javax.swing.JPanel {
 
     private Inicio panelAnterior;
     private Libro libro;
@@ -21,15 +21,15 @@ public class Edicion extends javax.swing.JPanel {
     /**
      * Creates new form Edicion
      */
-    public Edicion(Inicio panelAnterior, Libro libro) {
+    public Nuevo(Inicio panelAnterior, Libro libro) {
         initComponents();
         this.panelAnterior = panelAnterior;
         this.libro = libro;
 
-        jTextFieldNombre.setText(libro.getNombre());
-        jTextFieldAutor.setText(libro.getAutor());
-        jTextFieldGenero.setText(libro.getGenero());
-        jTextFieldAnio.setText(libro.getAño());
+        jTextFieldNombre.setText("");
+        jTextFieldAutor.setText("");
+        jTextFieldGenero.setText("");
+        jTextFieldAnio.setText("");
 
         saveButton.addActionListener(new SaveListener(this));
         volverButton.addActionListener(new VolverListener(this));
@@ -151,9 +151,9 @@ public class Edicion extends javax.swing.JPanel {
 
     class SaveListener implements ActionListener {
 
-        Edicion panelEdicion;
+        Nuevo panelEdicion;
 
-        public SaveListener(Edicion panelEdicion) {
+        public SaveListener(Nuevo panelEdicion) {
             this.panelEdicion = panelEdicion;
         }
 
@@ -166,14 +166,13 @@ public class Edicion extends javax.swing.JPanel {
 
     class VolverListener implements ActionListener {
 
-        Edicion panelEdicion;
+        Nuevo panelEdicion;
 
-        public VolverListener(Edicion panelEdicion) {
+        public VolverListener(Nuevo panelEdicion) {
             this.panelEdicion = panelEdicion;
         }
 
         public void actionPerformed(ActionEvent e) {
-            panelAnterior.restaurarLibro();
             panelEdicion.setVisible(false);
             panelAnterior.setVisible(true);
         }

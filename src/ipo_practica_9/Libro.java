@@ -22,6 +22,9 @@ public class Libro {
         this.año = año;
     }
 
+    Libro() {      
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

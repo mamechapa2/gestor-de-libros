@@ -7,6 +7,8 @@ package ipo_practica_9;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
@@ -24,15 +26,16 @@ public class Inicio extends javax.swing.JPanel {
     private JFrame framePadre;
 
     private DefaultListModel listModel;
-    
+
     private Vector<Libro> vectorLibros;
+    private Libro libroAnterior;
 
     /**
      * Creates new form Inicio
      */
     public Inicio(JFrame framePadre) {
         initComponents();
-        
+
         this.framePadre = framePadre;
         this.vectorLibros = new Vector<>();
 
@@ -44,25 +47,33 @@ public class Inicio extends javax.swing.JPanel {
         list.setVisibleRowCount(5);
         list.addMouseListener(new MouseListener(this));
         setMinimumSize(new Dimension(500, 400));
+        addButton.addActionListener(new NuevoListener(this));
 
         setVisible(true);
     }
-    
-    private void addLibrosEjemplo(){
+
+    private void addLibrosEjemplo() {
         vectorLibros.add(new Libro("La chica de nieve", "Javier Castillo", "Thriller", "2020"));
-        vectorLibros.add(new Libro("Marina", "Carlos Ruiz Zafon", "Thriller", "nosexd"));
-        vectorLibros.add(new Libro("La pareja de al lado", "Shari Lapena", "Thriller", "xd"));
+        vectorLibros.add(new Libro("Marina", "Carlos Ruiz Zafon", "pf xd", "nosexd"));
+        vectorLibros.add(new Libro("La pareja de al lado", "Shari Lapena", "ajajjjajj", "xd"));
         vectorLibros.add(new Libro("Tierra", "Eloy Moreno", "Thriller", "2020"));
-        
+
         for (Libro libro : vectorLibros) {
             listModel.addElement(libro.getNombre() + " | " + libro.getAutor());
         }
     }
-    
-    public void guardarLibro(Libro libro){
+
+    public void guardarLibro(Libro libro) {
         vectorLibros.add(libro);
         listModel.addElement(libro.getNombre() + " | " + libro.getAutor());
     }
+    
+    public void restaurarLibro(){
+        vectorLibros.add(libroAnterior);
+        listModel.addElement(libroAnterior.getNombre() + " | " + libroAnterior.getAutor());
+    }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -139,16 +150,36 @@ public class Inicio extends javax.swing.JPanel {
                 int elementoSeleccionado = list.getSelectedIndex();
                 list.setSelectedIndex(elementoSeleccionado);
                 list.ensureIndexIsVisible(elementoSeleccionado);
-                
+
                 Edicion edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado));
+                libroAnterior = vectorLibros.get(elementoSeleccionado);
                 vectorLibros.remove(elementoSeleccionado);
                 listModel.remove(elementoSeleccionado);
-                
+
                 framePadre.add(edicion, BorderLayout.PAGE_START);
                 framePadre.pack();
                 edicion.setVisible(true);
                 inicio.setVisible(false);
             }
+        }
+    }
+
+    class NuevoListener implements ActionListener {
+
+        Inicio inicio;
+
+        public NuevoListener(Inicio JPanel) {
+            this.inicio = JPanel;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            Libro libro = new Libro();
+            Nuevo nuevo = new Nuevo(inicio, libro);
+
+            framePadre.add(nuevo, BorderLayout.PAGE_START);
+            framePadre.pack();
+            nuevo.setVisible(true);
+            inicio.setVisible(false);
         }
     }
 }
