@@ -12,8 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
-import javax.lang.model.SourceVersion;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -45,7 +43,7 @@ public class Lista extends JPanel
     private static final String anadirString = "Añadir";
     private static final String eliminarString = "Eliminar";
     private JButton eliminarButton;
-    private JTextField employeeName;
+    private JTextField campoTexto;
     private JFrame frame;
 
     private Vector<Libro> libros;
@@ -67,11 +65,11 @@ public class Lista extends JPanel
         list.addMouseListener(new MouseListener(this));
         JScrollPane listScrollPane = new JScrollPane(list);
 
-        JButton hireButton = new JButton(anadirString);
-        HireListener hireListener = new HireListener(hireButton);
-        hireButton.setActionCommand(anadirString);
-        hireButton.addActionListener(hireListener);
-        hireButton.setEnabled(false);
+        JButton anadirButton = new JButton(anadirString);
+        anadirListener anadirListener = new anadirListener(anadirButton);
+        anadirButton.setActionCommand(anadirString);
+        anadirButton.addActionListener(anadirListener);
+        anadirButton.setEnabled(false);
 
         eliminarButton = new JButton(eliminarString);
         eliminarButton.setActionCommand(eliminarString);
@@ -81,10 +79,10 @@ public class Lista extends JPanel
         editButton.setActionCommand("Editar");
         editButton.addActionListener(new EditListener());
 
-        employeeName = new JTextField(10);
-        employeeName.addActionListener(hireListener);
-        employeeName.getDocument().addDocumentListener(hireListener);
-        String name = listModel.getElementAt(list.getSelectedIndex()).toString();
+        campoTexto = new JTextField(10);
+        campoTexto.addActionListener(anadirListener);
+        campoTexto.getDocument().addDocumentListener(anadirListener);
+        String nombre = listModel.getElementAt(list.getSelectedIndex()).toString();
 
         //Create a panel that uses BoxLayout.
         JPanel buttonPane = new JPanel();
@@ -94,8 +92,8 @@ public class Lista extends JPanel
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
         buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(employeeName);
-        buttonPane.add(hireButton);
+        buttonPane.add(campoTexto);
+        buttonPane.add(anadirButton);
 
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
@@ -179,24 +177,24 @@ public class Lista extends JPanel
     }
 
 //This listener is shared by the text field and the hire button.
-    class HireListener implements ActionListener, DocumentListener {
+    class anadirListener implements ActionListener, DocumentListener {
 
         private boolean alreadyEnabled = false;
         private JButton button;
 
-        public HireListener(JButton button) {
+        public anadirListener(JButton button) {
             this.button = button;
         }
 
         //Required by ActionListener.
         public void actionPerformed(ActionEvent e) {
-            String name = employeeName.getText();
+            String name = campoTexto.getText();
 
             //User didn't type in a unique name...
             if (name.equals("") || alreadyInList(name)) {
                 Toolkit.getDefaultToolkit().beep();
-                employeeName.requestFocusInWindow();
-                employeeName.selectAll();
+                campoTexto.requestFocusInWindow();
+                campoTexto.selectAll();
                 return;
             }
 
@@ -207,13 +205,13 @@ public class Lista extends JPanel
                 index++;
             }
 
-            listModel.insertElementAt(employeeName.getText(), index);
+            listModel.insertElementAt(campoTexto.getText(), index);
             //If we just wanted to add to the end, we'd do this:
             //listModel.addElement(employeeName.getText());
 
             //Reset the text field.
-            employeeName.requestFocusInWindow();
-            employeeName.setText("");
+            campoTexto.requestFocusInWindow();
+            campoTexto.setText("");
 
             //Select the new item and make it visible.
             list.setSelectedIndex(index);

@@ -5,16 +5,13 @@
  */
 package ipo_practica_9;
 
-import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -25,10 +22,11 @@ public class Edicion extends JPanel {
     private JTextField nombreLibro;
     private JTextField autorLibro;
     private JTextField generoLibro;
-    
+
     private JFrame frame;
-    
+
     private Libro libro;
+
     /**
      * Creates new form Edicion
      */
@@ -36,16 +34,21 @@ public class Edicion extends JPanel {
         initComponents();
         this.frame = frame;
         this.libro = libro;
+
+        //Inicializacion jlabel
         JLabel nombre = new JLabel("Nombre");
         JLabel autor = new JLabel("Autor");
         JLabel genero = new JLabel("Genero");
         JLabel anio = new JLabel("Año");
+
+        //Inicializacion textfield
         nombreLibro = new JTextField(libro.getNombre());
         autorLibro = new JTextField(libro.getAutor());
         generoLibro = new JTextField(libro.getGenero());
         JButton save = new JButton("Guardar");
-        
-        setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+
+        //Añadimos al panel
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         add(nombre);
         add(nombreLibro);
         add(autor);
@@ -54,8 +57,6 @@ public class Edicion extends JPanel {
         add(generoLibro);
         add(save);
         setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        
-        System.out.println("ipo_practica9.Edicion.<init>()");
     }
 
     /**

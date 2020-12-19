@@ -31,10 +31,8 @@
 package ipo_practica_9;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.Vector;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /* ListDemo.java requires no other files. */
 public class IPO_practica_9 {
@@ -53,14 +51,14 @@ public class IPO_practica_9 {
         librosEjemplo.add(new Libro("La chica de nieve4", "Javier Castillo", "Thriller", 2020));
         
         //Create and set up the window.
-        JFrame frame = new JFrame("ListDemo");
+        JFrame frame = new JFrame("Libros");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(500, 400));
 
         //Create and set up the content pane.
-        JComponent newContentPane = new Lista(frame, librosEjemplo);
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
+        JComponent lista = new Lista(frame, librosEjemplo);
+        lista.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(lista);
 
         //Display the window.
         frame.pack();
