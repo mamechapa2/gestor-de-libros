@@ -13,6 +13,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 
@@ -51,6 +53,8 @@ public class Inicio extends javax.swing.JPanel {
         list.addMouseListener(new MouseListener(this));
         setMinimumSize(new Dimension(500, 400));
         addButton.addActionListener(new NuevoListener(this));
+        Icon icon = new ImageIcon("add.png");
+        addButton.setIcon(icon);
 
         setVisible(true);
     }
@@ -77,7 +81,7 @@ public class Inicio extends javax.swing.JPanel {
     }
     
     public void cambiarIdioma(){
-        addButton.setText(idioma.get(5));
+//        addButton.setText(idioma.get(5));
         deleteButton.setText(idioma.get(6));
     }
     
@@ -146,7 +150,10 @@ public class Inicio extends javax.swing.JPanel {
         list = new javax.swing.JList<>();
         addButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        jLabelLibros = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
+        list.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         list.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -154,9 +161,12 @@ public class Inicio extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(list);
 
-        addButton.setText("Nuevo");
-
         deleteButton.setText("Eliminar");
+
+        jLabelLibros.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabelLibros.setText("Libros");
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -167,21 +177,28 @@ public class Inicio extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(addButton)
+                        .addComponent(jLabelLibros)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(deleteButton)
-                        .addGap(0, 277, Short.MAX_VALUE)))
+                        .addGap(0, 204, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addButton)
-                    .addComponent(deleteButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addButton)
+                        .addComponent(deleteButton))
+                    .addComponent(jLabelLibros)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -190,7 +207,9 @@ public class Inicio extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JLabel jLabelLibros;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList<String> list;
     // End of variables declaration//GEN-END:variables
 

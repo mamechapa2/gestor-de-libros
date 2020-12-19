@@ -1,4 +1,4 @@
-2
+3
 es
 10
 Archivo
@@ -15,6 +15,19 @@ Año
 en
 10
 Archive
+Language
+Exit
+Help
+New
+Delete
+Title
+Author
+Genre
+Year
+0
+prueba
+10
+Archivee
 Language
 Exit
 Help
