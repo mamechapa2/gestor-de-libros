@@ -83,7 +83,7 @@ public class Inicio extends javax.swing.JPanel {
     
     public void setIdioma(Vector<String> idioma){
         this.idioma = idioma;
-        cambiarIdioma();
+        cambiarIdioma();    
     }
 
     class MouseListener extends MouseAdapter {
