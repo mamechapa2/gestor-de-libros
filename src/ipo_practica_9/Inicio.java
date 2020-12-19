@@ -67,13 +67,58 @@ public class Inicio extends javax.swing.JPanel {
         vectorLibros.add(libro);
         listModel.addElement(libro.getNombre() + " | " + libro.getAutor());
     }
-    
-    public void restaurarLibro(){
+
+    public void restaurarLibro() {
         vectorLibros.add(libroAnterior);
         listModel.addElement(libroAnterior.getNombre() + " | " + libroAnterior.getAutor());
     }
 
-    
+    class MouseListener extends MouseAdapter {
+
+        Inicio inicio;
+
+        public MouseListener(Inicio JPanel) {
+            this.inicio = JPanel;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent evt) {
+            if (evt.getClickCount() == 2) {
+                int elementoSeleccionado = list.getSelectedIndex();
+                list.setSelectedIndex(elementoSeleccionado);
+                list.ensureIndexIsVisible(elementoSeleccionado);
+
+                Edicion edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado));
+                libroAnterior = vectorLibros.get(elementoSeleccionado);
+                vectorLibros.remove(elementoSeleccionado);
+                listModel.remove(elementoSeleccionado);
+
+                framePadre.add(edicion, BorderLayout.PAGE_START);
+                framePadre.pack();
+                edicion.setVisible(true);
+                inicio.setVisible(false);
+            }
+        }
+    }
+
+    class NuevoListener implements ActionListener {
+
+        Inicio inicio;
+
+        public NuevoListener(Inicio JPanel) {
+            this.inicio = JPanel;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            Libro libro = new Libro();
+            Nuevo nuevo = new Nuevo(inicio, libro);
+
+            framePadre.add(nuevo, BorderLayout.PAGE_START);
+            framePadre.pack();
+            nuevo.setVisible(true);
+            inicio.setVisible(false);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -136,50 +181,4 @@ public class Inicio extends javax.swing.JPanel {
     private javax.swing.JList<String> list;
     // End of variables declaration//GEN-END:variables
 
-    class MouseListener extends MouseAdapter {
-
-        Inicio inicio;
-
-        public MouseListener(Inicio JPanel) {
-            this.inicio = JPanel;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent evt) {
-            if (evt.getClickCount() == 2) {
-                int elementoSeleccionado = list.getSelectedIndex();
-                list.setSelectedIndex(elementoSeleccionado);
-                list.ensureIndexIsVisible(elementoSeleccionado);
-
-                Edicion edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado));
-                libroAnterior = vectorLibros.get(elementoSeleccionado);
-                vectorLibros.remove(elementoSeleccionado);
-                listModel.remove(elementoSeleccionado);
-
-                framePadre.add(edicion, BorderLayout.PAGE_START);
-                framePadre.pack();
-                edicion.setVisible(true);
-                inicio.setVisible(false);
-            }
-        }
-    }
-
-    class NuevoListener implements ActionListener {
-
-        Inicio inicio;
-
-        public NuevoListener(Inicio JPanel) {
-            this.inicio = JPanel;
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            Libro libro = new Libro();
-            Nuevo nuevo = new Nuevo(inicio, libro);
-
-            framePadre.add(nuevo, BorderLayout.PAGE_START);
-            framePadre.pack();
-            nuevo.setVisible(true);
-            inicio.setVisible(false);
-        }
-    }
 }
