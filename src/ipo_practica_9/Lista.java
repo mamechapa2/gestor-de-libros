@@ -89,14 +89,10 @@ public class Lista extends JPanel
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.add(eliminarButton);
         buttonPane.add(editButton);
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(campoTexto);
         buttonPane.add(anadirButton);
 
-        add(listScrollPane, BorderLayout.CENTER);
-        add(buttonPane, BorderLayout.PAGE_END);
+        add(listScrollPane, BorderLayout.PAGE_END);
+        add(buttonPane, BorderLayout.BEFORE_FIRST_LINE);
     }
 
     private void addLibros(Vector<Libro> librosEjemplo) {
