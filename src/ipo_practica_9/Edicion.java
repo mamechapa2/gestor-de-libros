@@ -19,7 +19,7 @@ public class Edicion extends javax.swing.JPanel {
     /**
      * Creates new form Edicion
      */
-    public Edicion(JPanel panelAnterior) {
+    public Edicion(JPanel panelAnterior, Libro libro) {
         initComponents();
         this.panelAnterior = panelAnterior;
         

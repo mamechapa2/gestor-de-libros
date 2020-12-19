@@ -9,12 +9,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -26,17 +24,20 @@ public class Inicio extends javax.swing.JPanel {
     private JFrame framePadre;
 
     private DefaultListModel listModel;
+    
+    private Vector<Libro> vectorLibros;
 
     /**
      * Creates new form Inicio
      */
     public Inicio(JFrame framePadre) {
         initComponents();
-        this.framePadre = framePadre;
+        
+        framePadre = framePadre;
+        vectorLibros = new Vector<>();
 
-        listModel = new DefaultListModel();
-        listModel.addElement("La chica de nieve");
-        listModel.addElement("La chica de nieve2");
+        this.listModel = new DefaultListModel();
+        addLibrosEjemplo();
         list.setModel(listModel);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setSelectedIndex(0);
@@ -45,6 +46,17 @@ public class Inicio extends javax.swing.JPanel {
         setMinimumSize(new Dimension(500, 400));
 
         setVisible(true);
+    }
+    
+    private void addLibrosEjemplo(){
+        vectorLibros.add(new Libro("La chica de nieve", "Javier Castillo", "Thriller", 2020));
+        vectorLibros.add(new Libro("La chica de nieve2", "Javier Castillo", "Thriller", 2020));
+        vectorLibros.add(new Libro("La chica de nieve3", "Javier Castillo", "Thriller", 2020));
+        vectorLibros.add(new Libro("La chica de nieve4", "Javier Castillo", "Thriller", 2020));
+        
+        for (Libro vectorLibro : vectorLibros) {
+            listModel.addElement(vectorLibro.getNombre() + " | " + vectorLibro.getAutor());
+        }
     }
 
     /**
@@ -123,7 +135,7 @@ public class Inicio extends javax.swing.JPanel {
                 list.setSelectedIndex(elementoSeleccionado);
                 list.ensureIndexIsVisible(elementoSeleccionado);
                 
-                Edicion edicion = new Edicion(lista);
+                Edicion edicion = new Edicion(lista, vectorLibros.get(elementoSeleccionado));
                 
                 framePadre.add(edicion, BorderLayout.PAGE_START);
                 framePadre.pack();
