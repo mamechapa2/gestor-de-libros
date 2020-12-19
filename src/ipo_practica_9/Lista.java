@@ -77,7 +77,7 @@ public class Lista extends JPanel
 
         JButton editButton = new JButton("Editar");
         editButton.setActionCommand("Editar");
-        editButton.addActionListener(new EditListener());
+        editButton.addActionListener(new EditListener(this));
 
         campoTexto = new JTextField(10);
         campoTexto.addActionListener(anadirListener);
@@ -101,11 +101,17 @@ public class Lista extends JPanel
         }
     }
 
+    public void volver() {
+        frame.setContentPane(this);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     class MouseListener extends MouseAdapter {
 
-        JPanel lista;
+        Lista lista;
 
-        public MouseListener(JPanel JPanel) {
+        public MouseListener(Lista JPanel) {
             this.lista = JPanel;
         }
 
@@ -117,7 +123,7 @@ public class Lista extends JPanel
                 list.setVisible(false);
                 list.setSelectedIndex(index);
                 list.ensureIndexIsVisible(index);
-                JComponent panelEdicion = new Edicion(frame, libros.get(index));
+                JComponent panelEdicion = new Edicion(frame, lista, libros.get(index));
                 panelEdicion.setOpaque(true);
 
                 frame.setContentPane(panelEdicion);
@@ -129,6 +135,12 @@ public class Lista extends JPanel
 
     class EditListener implements ActionListener {
 
+        Lista lista;
+
+        public EditListener(Lista JPanel) {
+            this.lista = JPanel;
+        }
+
         @Override
         public void actionPerformed(ActionEvent e) {
             list.setVisible(false);
@@ -136,7 +148,7 @@ public class Lista extends JPanel
             list.setVisible(false);
             list.setSelectedIndex(index);
             list.ensureIndexIsVisible(index);
-            JComponent panelEdicion = new Edicion(frame, libros.get(index));
+            JComponent panelEdicion = new Edicion(frame, lista, libros.get(index));
             panelEdicion.setOpaque(true);
 
             frame.setContentPane(panelEdicion);

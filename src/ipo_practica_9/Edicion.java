@@ -5,9 +5,12 @@
  */
 package ipo_practica_9;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,18 +25,21 @@ public class Edicion extends JPanel {
     private JTextField nombreLibro;
     private JTextField autorLibro;
     private JTextField generoLibro;
+    private JTextField anioLibro;
 
     private JFrame frame;
+    private Lista pantallaAnterior;
 
     private Libro libro;
 
     /**
      * Creates new form Edicion
      */
-    Edicion(JFrame frame, Libro libro) {
+    Edicion(JFrame frame, Lista pantallaAnterior, Libro libro) {
         initComponents();
         this.frame = frame;
         this.libro = libro;
+        this.pantallaAnterior = pantallaAnterior;
 
         //Inicializacion jlabel
         JLabel nombre = new JLabel("Nombre");
@@ -45,7 +51,12 @@ public class Edicion extends JPanel {
         nombreLibro = new JTextField(libro.getNombre());
         autorLibro = new JTextField(libro.getAutor());
         generoLibro = new JTextField(libro.getGenero());
+        anioLibro = new JTextField(libro.getAño());
+
+        //Boton guardar cambios
         JButton save = new JButton("Guardar");
+        save.setActionCommand("Guardar");
+        save.addActionListener(new SaveListener());
 
         //Añadimos al panel
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -55,8 +66,10 @@ public class Edicion extends JPanel {
         add(autorLibro);
         add(genero);
         add(generoLibro);
+        add(anio);
+        add(anioLibro);
         add(save);
-        setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+//        setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
 
     /**
@@ -83,4 +96,18 @@ public class Edicion extends JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+    class SaveListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            libro.setAutor(autorLibro.getText());
+            libro.setNombre(nombreLibro.getText());
+            libro.setAño(anioLibro.getText());
+            libro.setGenero(generoLibro.getText());
+
+            pantallaAnterior.volver();
+        }
+
+    }
+
 }

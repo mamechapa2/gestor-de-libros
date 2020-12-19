@@ -45,10 +45,10 @@ public class IPO_practica_9 {
      */
     private static void createAndShowGUI() {
         librosEjemplo = new Vector<>();
-        librosEjemplo.add(new Libro("La chica de nieve", "Javier Castillo", "Thriller", 2020));
-        librosEjemplo.add(new Libro("La chica de nieve2", "Javier Castillo", "Thriller", 2020));
-        librosEjemplo.add(new Libro("La chica de nieve3", "Javier Castillo", "Thriller", 2020));
-        librosEjemplo.add(new Libro("La chica de nieve4", "Javier Castillo", "Thriller", 2020));
+        librosEjemplo.add(new Libro("La chica de nieve", "Javier Castillo", "Thriller", "2020"));
+        librosEjemplo.add(new Libro("La chica de nieve2", "Javier Castillo", "Thriller", "2020"));
+        librosEjemplo.add(new Libro("La chica de nieve3", "Javier Castillo", "Thriller", "2020"));
+        librosEjemplo.add(new Libro("La chica de nieve4", "Javier Castillo", "Thriller", "2020"));
         
         //Create and set up the window.
         JFrame frame = new JFrame("Libros");
