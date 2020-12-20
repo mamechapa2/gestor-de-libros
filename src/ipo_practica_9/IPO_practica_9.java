@@ -99,6 +99,7 @@ public class IPO_practica_9 {
     static class IdiomaListener implements ActionListener {
 
         private int idioma;
+        private JFrame frame;
 
         public IdiomaListener(int idioma) {
             this.idioma = idioma;
@@ -106,7 +107,20 @@ public class IPO_practica_9 {
 
         public void actionPerformed(ActionEvent e) {
             inicio.setIdioma(idiomas.getIdioma(idioma));
+            cambiarIdioma(idioma);
         }
+    }
+    
+    public static void cambiarIdioma(int cual){
+        jMenu1Text = idiomas.getIdioma(cual).get(1);
+        jMenu3Text = idiomas.getIdioma(cual).get(2);
+        jMenuItem2Text = idiomas.getIdioma(cual).get(3);
+        jMenu2Text = idiomas.getIdioma(cual).get(4);
+        
+        jMenu1.setText(jMenu1Text);//Archivo
+        jMenu3.setText(jMenu3Text); //Idioma
+        jMenuItem2.setText(jMenuItem2Text);//Salir
+        jMenu2.setText(jMenu2Text); 
     }
 
 }
