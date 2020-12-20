@@ -114,6 +114,10 @@ public class Inicio extends javax.swing.JPanel {
         }
     }
 
+    void guardarDatos() {
+        GuardarDatos gd = new GuardarDatos(vectorLibros, "libros");
+    }
+
     class MouseListener extends MouseAdapter {
 
         Inicio inicio;

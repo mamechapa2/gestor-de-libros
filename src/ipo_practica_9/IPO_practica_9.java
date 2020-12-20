@@ -38,6 +38,7 @@ public class IPO_practica_9 {
     static private javax.swing.JMenuItem jMenuItem2;
     static private javax.swing.JMenuItem jMenu3;
     static private javax.swing.JMenuItem jMenuItem3;
+    static private javax.swing.JMenuItem jMenuItem4;
 
     static private Inicio inicio;
 
@@ -78,6 +79,9 @@ public class IPO_practica_9 {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem3.setText("Abrir");
         jMenuItem3.addActionListener(new AbrirListener(frame));
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem4.setText("Guardar");
+        jMenuItem4.addActionListener(new GuardarListener(frame));
         jMenu3 = new javax.swing.JMenu();
         jMenu3.setText(jMenu3Text); //Idioma
         for (int i = 0; i < idiomas.getNumIdiomas(); i++) {
@@ -91,6 +95,7 @@ public class IPO_practica_9 {
         jMenu2.setText(jMenu2Text); //Ayuda
 
         jMenu1.add(jMenuItem3);
+        jMenu1.add(jMenuItem4);
         jMenu1.add(jMenu3);
         jMenu1.add(jMenuItem2);
         jMenuBar1.add(jMenu1);
@@ -133,13 +138,24 @@ public class IPO_practica_9 {
 
             int resultado = selectorArchivos.showOpenDialog(frame);
 
-            File archivo = selectorArchivos.getSelectedFile();
-
-            if ((archivo == null) || (archivo.getName().equals(""))) {
-                JOptionPane.showMessageDialog(frame, "Nombre de archivo inválido", "Nombre de archivo inválido", JOptionPane.ERROR_MESSAGE);
+            if (resultado == JFileChooser.APPROVE_OPTION) {
+                File archivo = selectorArchivos.getSelectedFile();
+                System.out.println("Fichero cargado: " + archivo.getAbsolutePath());
+                cargarDatos(archivo.getAbsolutePath());
             }
+        }
+    }
 
-            cargarDatos(archivo.getAbsolutePath());;
+    static class GuardarListener implements ActionListener {
+
+        private JFrame frame;
+
+        public GuardarListener(JFrame frame) {
+            this.frame = frame;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            inicio.guardarDatos();
         }
     }
 
@@ -154,7 +170,7 @@ public class IPO_practica_9 {
         jMenuItem2.setText(jMenuItem2Text);//Salir
         jMenu2.setText(jMenu2Text);
     }
-    
+
     public static void cargarDatos(String ruta) {
         inicio.cargarDatos(ruta);
     }
