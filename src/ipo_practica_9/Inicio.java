@@ -27,7 +27,7 @@ public class Inicio extends javax.swing.JPanel {
     private JFrame framePadre;
 
     private DefaultListModel listModel;
-    
+
     Vector<String> idioma;
 
     private Vector<Libro> vectorLibros;
@@ -53,8 +53,9 @@ public class Inicio extends javax.swing.JPanel {
         list.addMouseListener(new MouseListener(this));
         setMinimumSize(new Dimension(500, 400));
         addButton.addActionListener(new NuevoListener(this));
-        Icon addIcon = new ImageIcon("add.png");
-        Icon deleteIcon = new ImageIcon("delete.png");
+        deleteButton.addActionListener(new EliminarListener(this));
+//        Icon addIcon = new ImageIcon("add.png");
+//        Icon deleteIcon = new ImageIcon("delete.png");
 //        addButton.setIcon(addIcon);
 //        deleteButton.setIcon(deleteIcon);
 
@@ -81,15 +82,15 @@ public class Inicio extends javax.swing.JPanel {
         vectorLibros.add(libroAnterior);
         listModel.addElement(libroAnterior.getNombre() + " | " + libroAnterior.getAutor());
     }
-    
-    public void cambiarIdioma(){
+
+    public void cambiarIdioma() {
         addButton.setText(idioma.get(5));
         deleteButton.setText(idioma.get(6));
     }
-    
-    public void setIdioma(Vector<String> idioma){
+
+    public void setIdioma(Vector<String> idioma) {
         this.idioma = idioma;
-        cambiarIdioma();    
+        cambiarIdioma();
     }
 
     class MouseListener extends MouseAdapter {
@@ -136,6 +137,24 @@ public class Inicio extends javax.swing.JPanel {
             framePadre.pack();
             nuevo.setVisible(true);
             inicio.setVisible(false);
+        }
+    }
+
+    class EliminarListener implements ActionListener {
+
+        Inicio inicio;
+
+        public EliminarListener(Inicio JPanel) {
+            this.inicio = JPanel;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            int elementoSeleccionado = list.getSelectedIndex();
+            list.setSelectedIndex(elementoSeleccionado);
+            list.ensureIndexIsVisible(elementoSeleccionado);
+            
+            listModel.removeElementAt(elementoSeleccionado);
+            vectorLibros.removeElementAt(elementoSeleccionado);
         }
     }
 
