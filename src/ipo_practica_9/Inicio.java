@@ -11,7 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -93,6 +96,24 @@ public class Inicio extends javax.swing.JPanel {
         cambiarIdioma();
     }
 
+    void cargarDatos(String ruta) {
+        
+        try {
+            CargarDatos cd = new CargarDatos(ruta);
+            listModel.removeAllElements();
+            vectorLibros.removeAllElements();
+            for (Libro dato : cd.getDatos()) {
+                vectorLibros.add(dato);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (Libro libro : vectorLibros) {
+            listModel.addElement(libro.getNombre() + " | " + libro.getAutor());
+        }
+    }
+
     class MouseListener extends MouseAdapter {
 
         Inicio inicio;
@@ -152,7 +173,7 @@ public class Inicio extends javax.swing.JPanel {
             int elementoSeleccionado = list.getSelectedIndex();
             list.setSelectedIndex(elementoSeleccionado);
             list.ensureIndexIsVisible(elementoSeleccionado);
-            
+
             listModel.removeElementAt(elementoSeleccionado);
             vectorLibros.removeElementAt(elementoSeleccionado);
         }

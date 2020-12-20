@@ -9,11 +9,15 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,6 +37,7 @@ public class IPO_practica_9 {
     static private javax.swing.JMenuBar jMenuBar1;
     static private javax.swing.JMenuItem jMenuItem2;
     static private javax.swing.JMenuItem jMenu3;
+    static private javax.swing.JMenuItem jMenuItem3;
 
     static private Inicio inicio;
 
@@ -70,6 +75,9 @@ public class IPO_practica_9 {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu1.setText(jMenu1Text);//Archivo
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem3.setText("Abrir");
+        jMenuItem3.addActionListener(new AbrirListener(frame));
         jMenu3 = new javax.swing.JMenu();
         jMenu3.setText(jMenu3Text); //Idioma
         for (int i = 0; i < idiomas.getNumIdiomas(); i++) {
@@ -82,6 +90,7 @@ public class IPO_practica_9 {
         jMenu2 = new javax.swing.JMenu();
         jMenu2.setText(jMenu2Text); //Ayuda
 
+        jMenu1.add(jMenuItem3);
         jMenu1.add(jMenu3);
         jMenu1.add(jMenuItem2);
         jMenuBar1.add(jMenu1);
@@ -99,7 +108,6 @@ public class IPO_practica_9 {
     static class IdiomaListener implements ActionListener {
 
         private int idioma;
-        private JFrame frame;
 
         public IdiomaListener(int idioma) {
             this.idioma = idioma;
@@ -110,17 +118,45 @@ public class IPO_practica_9 {
             cambiarIdioma(idioma);
         }
     }
-    
-    public static void cambiarIdioma(int cual){
+
+    static class AbrirListener implements ActionListener {
+
+        private JFrame frame;
+
+        public AbrirListener(JFrame frame) {
+            this.frame = frame;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser selectorArchivos = new JFileChooser();
+            selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+            int resultado = selectorArchivos.showOpenDialog(frame);
+
+            File archivo = selectorArchivos.getSelectedFile();
+
+            if ((archivo == null) || (archivo.getName().equals(""))) {
+                JOptionPane.showMessageDialog(frame, "Nombre de archivo inválido", "Nombre de archivo inválido", JOptionPane.ERROR_MESSAGE);
+            }
+
+            cargarDatos(archivo.getAbsolutePath());;
+        }
+    }
+
+    public static void cambiarIdioma(int cual) {
         jMenu1Text = idiomas.getIdioma(cual).get(1);
         jMenu3Text = idiomas.getIdioma(cual).get(2);
         jMenuItem2Text = idiomas.getIdioma(cual).get(3);
         jMenu2Text = idiomas.getIdioma(cual).get(4);
-        
+
         jMenu1.setText(jMenu1Text);//Archivo
         jMenu3.setText(jMenu3Text); //Idioma
         jMenuItem2.setText(jMenuItem2Text);//Salir
-        jMenu2.setText(jMenu2Text); 
+        jMenu2.setText(jMenu2Text);
+    }
+    
+    public static void cargarDatos(String ruta) {
+        inicio.cargarDatos(ruta);
     }
 
 }
