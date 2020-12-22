@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ipo_practica_9;
+package interfaces;
 
+import interfaces.Edicion;
+import ipo_practica_9.Libro;
+import utils.GuardarDatos;
+import utils.CargarDatos;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -96,7 +100,7 @@ public class Inicio extends javax.swing.JPanel {
         cambiarIdioma();
     }
 
-    void cargarDatos(String ruta) {
+    public void cargarDatos(String ruta) {
         
         try {
             CargarDatos cd = new CargarDatos(ruta);
@@ -114,7 +118,7 @@ public class Inicio extends javax.swing.JPanel {
         }
     }
 
-    void guardarDatos() {
+    public void guardarDatos() {
         GuardarDatos gd = new GuardarDatos(vectorLibros, "libros");
     }
 

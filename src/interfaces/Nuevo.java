@@ -3,38 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ipo_practica_9;
+package interfaces;
 
+import interfaces.Inicio;
+import ipo_practica_9.Libro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-import javax.swing.JPanel;
 
 /**
  *
  * @author mamechapa
  */
-public class Edicion extends javax.swing.JPanel {
+public class Nuevo extends javax.swing.JPanel {
 
     private Inicio panelAnterior;
     private Libro libro;
-
+    
     private Vector<String> idioma;
 
     /**
      * Creates new form Edicion
      */
-    public Edicion(Inicio panelAnterior, Libro libro, Vector<String> idioma) {
+    public Nuevo(Inicio panelAnterior, Libro libro, Vector<String> idioma) {
         initComponents();
         this.panelAnterior = panelAnterior;
         this.libro = libro;
         this.idioma = idioma;
         cambiarIdioma();
 
-        jTextFieldNombre.setText(libro.getNombre());
-        jTextFieldAutor.setText(libro.getAutor());
-        jTextFieldGenero.setText(libro.getGenero());
-        jTextFieldAnio.setText(libro.getAño());
+        jTextFieldNombre.setText("");
+        jTextFieldAutor.setText("");
+        jTextFieldGenero.setText("");
+        jTextFieldAnio.setText("");
 
         saveButton.addActionListener(new SaveListener(this));
         volverButton.addActionListener(new VolverListener(this));
@@ -47,8 +48,8 @@ public class Edicion extends javax.swing.JPanel {
         libro.setAño(jTextFieldAnio.getText());
         panelAnterior.guardarLibro(libro);
     }
-
-    public void cambiarIdioma() {
+    
+    public void cambiarIdioma(){
         jLabelNombre.setText(idioma.get(7));
         jLabelAutor.setText(idioma.get(8));
         jLabelGenero.setText(idioma.get(9));
@@ -163,9 +164,9 @@ public class Edicion extends javax.swing.JPanel {
 
     class SaveListener implements ActionListener {
 
-        Edicion panelEdicion;
+        Nuevo panelEdicion;
 
-        public SaveListener(Edicion panelEdicion) {
+        public SaveListener(Nuevo panelEdicion) {
             this.panelEdicion = panelEdicion;
         }
 
@@ -178,14 +179,13 @@ public class Edicion extends javax.swing.JPanel {
 
     class VolverListener implements ActionListener {
 
-        Edicion panelEdicion;
+        Nuevo panelEdicion;
 
-        public VolverListener(Edicion panelEdicion) {
+        public VolverListener(Nuevo panelEdicion) {
             this.panelEdicion = panelEdicion;
         }
 
         public void actionPerformed(ActionEvent e) {
-            panelAnterior.restaurarLibro();
             panelEdicion.setVisible(false);
             panelAnterior.setVisible(true);
         }

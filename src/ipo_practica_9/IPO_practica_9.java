@@ -5,6 +5,8 @@
  */
 package ipo_practica_9;
 
+import utils.Idiomas;
+import interfaces.Inicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -70,7 +72,7 @@ public class IPO_practica_9 {
     private static void crearVentana() {
         JFrame frame = new JFrame("App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(500, 400));
+        frame.setMinimumSize(new Dimension(500, 300));
         inicio = new Inicio(frame, idiomas.getIdioma(0));
 
         jMenuBar1 = new javax.swing.JMenuBar();
