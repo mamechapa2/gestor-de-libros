@@ -95,6 +95,7 @@ public class IPO_practica_9 {
         jMenuItem2.setText(jMenuItem2Text);//Salir
         jMenu2 = new javax.swing.JMenu();
         jMenu2.setText(jMenu2Text); //Ayuda
+        jMenu2.addActionListener(new AyudaListener(frame));
 
         jMenu1.add(jMenuItem3);
         jMenu1.add(jMenuItem4);
@@ -158,6 +159,21 @@ public class IPO_practica_9 {
 
         public void actionPerformed(ActionEvent e) {
             inicio.guardarDatos();
+        }
+    }
+
+    static class AyudaListener implements ActionListener {
+
+//        private JFrame frame;
+
+        public AyudaListener(JFrame frame) {
+//            this.frame = frame;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+            String mensaje = "HOLA";
+            JOptionPane.showMessageDialog(frame, mensaje);
         }
     }
 
