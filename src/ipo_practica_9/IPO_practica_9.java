@@ -20,6 +20,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -41,6 +42,7 @@ public class IPO_practica_9 {
     static private javax.swing.JMenuItem jMenu3;
     static private javax.swing.JMenuItem jMenuItem3;
     static private javax.swing.JMenuItem jMenuItem4;
+    static private javax.swing.JMenuItem jMenuItem5;
 
     static private Inicio inicio;
 
@@ -95,12 +97,15 @@ public class IPO_practica_9 {
         jMenuItem2.setText(jMenuItem2Text);//Salir
         jMenu2 = new javax.swing.JMenu();
         jMenu2.setText(jMenu2Text); //Ayuda
-        jMenu2.addActionListener(new AyudaListener(frame));
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem5.setText("Ayuda");
+        jMenuItem5.addActionListener(new AyudaListener(frame));
 
         jMenu1.add(jMenuItem3);
         jMenu1.add(jMenuItem4);
         jMenu1.add(jMenu3);
         jMenu1.add(jMenuItem2);
+        jMenu2.add(jMenuItem5);
         jMenuBar1.add(jMenu1);
         jMenuBar1.add(jMenu2);
 
@@ -138,7 +143,9 @@ public class IPO_practica_9 {
         public void actionPerformed(ActionEvent e) {
             JFileChooser selectorArchivos = new JFileChooser();
             selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    ".txt", "txt");
+            selectorArchivos.setFileFilter(filter);
             int resultado = selectorArchivos.showOpenDialog(frame);
 
             if (resultado == JFileChooser.APPROVE_OPTION) {
@@ -164,16 +171,25 @@ public class IPO_practica_9 {
 
     static class AyudaListener implements ActionListener {
 
-//        private JFrame frame;
+        private JFrame framePadre;
 
         public AyudaListener(JFrame frame) {
-//            this.frame = frame;
+            this.framePadre = frame;
         }
 
         public void actionPerformed(ActionEvent e) {
-            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-            String mensaje = "HOLA";
-            JOptionPane.showMessageDialog(frame, mensaje);
+//            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            frame.setMinimumSize(new Dimension(500, 300));
+//
+//            frame.pack();
+//            frame.setLocationRelativeTo(null);
+//            frame.setVisible(true);
+            String textoAyuda = "·Para añadir un libro haga click en el boton de Nuevo y rellene toda la informacion del libro.\n"
+                    + "·Para eliminar un libro haga click en el boton de Eliminar.\n"
+                    + "·Si quiere editar o visualizar la informacion completa de un libro \n  haga doble click en el libro que desee consultar y se le mostrara toda la informacion del libro, la cual podra editar.\n";
+
+            JOptionPane.showMessageDialog(framePadre, textoAyuda);
         }
     }
 
