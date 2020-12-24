@@ -36,7 +36,7 @@ public class IPO_practica_9 {
     private static String jMenuItem4Text;
     private static String jMenuItem5Text;
     private static String textoAyuda;
-    
+
     static private Idiomas idiomas;
 
     static private javax.swing.JMenu jMenu1;
@@ -49,7 +49,6 @@ public class IPO_practica_9 {
     static private javax.swing.JMenuItem jMenuItem5;
 
     static private Inicio inicio;
-    
 
     /**
      * @param args the command line arguments
@@ -104,6 +103,7 @@ public class IPO_practica_9 {
         }
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem2.setText(jMenuItem2Text);//Salir
+        jMenuItem2.addActionListener(new CloseListener());
         jMenu2 = new javax.swing.JMenu();
         jMenu2.setText(jMenu2Text); //Ayuda
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -188,6 +188,13 @@ public class IPO_practica_9 {
 
         public void actionPerformed(ActionEvent e) {
             JOptionPane.showMessageDialog(framePadre, textoAyuda);
+        }
+    }
+
+    static private class CloseListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
         }
     }
 
