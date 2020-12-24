@@ -32,7 +32,11 @@ public class IPO_practica_9 {
     static private String jMenu3Text;
     static private String jMenuItem2Text;
     static private String jMenu2Text;
-
+    private static String jMenuItem3Text;
+    private static String jMenuItem4Text;
+    private static String jMenuItem5Text;
+    private static String textoAyuda;
+    
     static private Idiomas idiomas;
 
     static private javax.swing.JMenu jMenu1;
@@ -45,6 +49,7 @@ public class IPO_practica_9 {
     static private javax.swing.JMenuItem jMenuItem5;
 
     static private Inicio inicio;
+    
 
     /**
      * @param args the command line arguments
@@ -69,6 +74,10 @@ public class IPO_practica_9 {
         jMenu3Text = idiomas.getIdioma(0).get(2);
         jMenuItem2Text = idiomas.getIdioma(0).get(3);
         jMenu2Text = idiomas.getIdioma(0).get(4);
+        jMenuItem3Text = idiomas.getIdioma(0).get(11);
+        jMenuItem4Text = idiomas.getIdioma(0).get(12);
+        jMenuItem5Text = idiomas.getIdioma(0).get(13);
+        textoAyuda = idiomas.getIdioma(0).get(14);
     }
 
     private static void crearVentana() {
@@ -81,10 +90,10 @@ public class IPO_practica_9 {
         jMenu1 = new javax.swing.JMenu();
         jMenu1.setText(jMenu1Text);//Archivo
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem3.setText("Abrir");
+        jMenuItem3.setText(jMenuItem3Text);
         jMenuItem3.addActionListener(new AbrirListener(frame));
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem4.setText("Guardar");
+        jMenuItem4.setText(jMenuItem4Text);
         jMenuItem4.addActionListener(new GuardarListener(frame));
         jMenu3 = new javax.swing.JMenu();
         jMenu3.setText(jMenu3Text); //Idioma
@@ -98,7 +107,7 @@ public class IPO_practica_9 {
         jMenu2 = new javax.swing.JMenu();
         jMenu2.setText(jMenu2Text); //Ayuda
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem5.setText("Ayuda");
+        jMenuItem5.setText(jMenuItem5Text);
         jMenuItem5.addActionListener(new AyudaListener(frame));
 
         jMenu1.add(jMenuItem3);
@@ -178,17 +187,6 @@ public class IPO_practica_9 {
         }
 
         public void actionPerformed(ActionEvent e) {
-//            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            frame.setMinimumSize(new Dimension(500, 300));
-//
-//            frame.pack();
-//            frame.setLocationRelativeTo(null);
-//            frame.setVisible(true);
-            String textoAyuda = "·Para añadir un libro haga click en el boton de Nuevo y rellene toda la informacion del libro.\n"
-                    + "·Para eliminar un libro haga click en el boton de Eliminar.\n"
-                    + "·Si quiere editar o visualizar la informacion completa de un libro \n  haga doble click en el libro que desee consultar y se le mostrara toda la informacion del libro, la cual podra editar.\n";
-
             JOptionPane.showMessageDialog(framePadre, textoAyuda);
         }
     }
@@ -198,11 +196,18 @@ public class IPO_practica_9 {
         jMenu3Text = idiomas.getIdioma(cual).get(2);
         jMenuItem2Text = idiomas.getIdioma(cual).get(3);
         jMenu2Text = idiomas.getIdioma(cual).get(4);
+        jMenuItem3Text = idiomas.getIdioma(cual).get(11);
+        jMenuItem4Text = idiomas.getIdioma(cual).get(12);
+        jMenuItem5Text = idiomas.getIdioma(cual).get(13);
+        textoAyuda = idiomas.getIdioma(cual).get(14);
 
         jMenu1.setText(jMenu1Text);//Archivo
         jMenu3.setText(jMenu3Text); //Idioma
         jMenuItem2.setText(jMenuItem2Text);//Salir
         jMenu2.setText(jMenu2Text);
+        jMenuItem3.setText(jMenuItem3Text);
+        jMenuItem4.setText(jMenuItem4Text);
+        jMenuItem5.setText(jMenuItem5Text);
     }
 
     public static void cargarDatos(String ruta) {
