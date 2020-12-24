@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ipo_practica_9;
+package interfaces;
 
+import interfaces.Inicio;
+import ipo_practica_9.Libro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -52,6 +54,8 @@ public class Nuevo extends javax.swing.JPanel {
         jLabelAutor.setText(idioma.get(8));
         jLabelGenero.setText(idioma.get(9));
         jLabelAnio.setText(idioma.get(10));
+        saveButton.setText(idioma.get(16));
+        volverButton.setText(idioma.get(15));
     }
 
     /**
