@@ -80,7 +80,7 @@ public class IPO_practica_9 {
     }
 
     private static void crearVentana() {
-        JFrame frame = new JFrame("App");
+        JFrame frame = new JFrame("Gestor de libros");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(500, 300));
         inicio = new Inicio(frame, idiomas.getIdioma(0));
