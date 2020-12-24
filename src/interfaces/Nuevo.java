@@ -54,6 +54,8 @@ public class Nuevo extends javax.swing.JPanel {
         jLabelAutor.setText(idioma.get(8));
         jLabelGenero.setText(idioma.get(9));
         jLabelAnio.setText(idioma.get(10));
+        saveButton.setText(idioma.get(16));
+        volverButton.setText(idioma.get(15));
     }
 
     /**

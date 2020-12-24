@@ -20,8 +20,6 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 
@@ -32,6 +30,8 @@ import javax.swing.ListSelectionModel;
 public class Inicio extends javax.swing.JPanel {
 
     private JFrame framePadre;
+    private Nuevo nuevo;
+    private Edicion edicion;
 
     private DefaultListModel listModel;
 
@@ -137,7 +137,7 @@ public class Inicio extends javax.swing.JPanel {
                 list.setSelectedIndex(elementoSeleccionado);
                 list.ensureIndexIsVisible(elementoSeleccionado);
 
-                Edicion edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado), idioma);
+                edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado), idioma);
                 libroAnterior = vectorLibros.get(elementoSeleccionado);
                 vectorLibros.remove(elementoSeleccionado);
                 listModel.remove(elementoSeleccionado);
@@ -160,7 +160,7 @@ public class Inicio extends javax.swing.JPanel {
 
         public void actionPerformed(ActionEvent e) {
             Libro libro = new Libro();
-            Nuevo nuevo = new Nuevo(inicio, libro, idioma);
+            nuevo = new Nuevo(inicio, libro, idioma);
 
             framePadre.add(nuevo, BorderLayout.PAGE_START);
             framePadre.pack();
