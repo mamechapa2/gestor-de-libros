@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
@@ -38,14 +39,14 @@ public class IPO_practica_9 {
 
     static private Idiomas idiomas;
 
-    static private javax.swing.JMenu jMenu1;
-    static private javax.swing.JMenu jMenu2;
-    static private javax.swing.JMenuBar jMenuBar1;
-    static private javax.swing.JMenuItem jMenuItem2;
-    static private javax.swing.JMenuItem jMenu3;
-    static private javax.swing.JMenuItem jMenuItem3;
-    static private javax.swing.JMenuItem jMenuItem4;
-    static private javax.swing.JMenuItem jMenuItem5;
+    static private javax.swing.JMenu menuArchivo;
+    static private javax.swing.JMenu menuAyuda;
+    static private javax.swing.JMenuBar menuBar;
+    static private javax.swing.JMenuItem menuItemSalir;
+    static private javax.swing.JMenuItem menuItemIdioma;
+    static private javax.swing.JMenuItem menuItemAbrir;
+    static private javax.swing.JMenuItem menuItemGuardar;
+    static private javax.swing.JMenuItem menuItemAyuda;
 
     static private Inicio inicio;
 
@@ -84,46 +85,51 @@ public class IPO_practica_9 {
         frame.setMinimumSize(new Dimension(500, 300));
         inicio = new Inicio(frame, idiomas.getIdioma(0));
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu1.setText(jMenu1Text);//Archivo
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem3.setText(jMenuItem3Text);
-        jMenuItem3.addActionListener(new AbrirListener(frame));
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem4.setText(jMenuItem4Text);
-        jMenuItem4.addActionListener(new GuardarListener(frame));
-        jMenu3 = new javax.swing.JMenu();
-        jMenu3.setText(jMenu3Text); //Idioma
-        for (int i = 0; i < idiomas.getNumIdiomas(); i++) {
-            JMenuItem menuItemAux = new JMenuItem(idiomas.getIdioma(i).firstElement());
-            menuItemAux.addActionListener(new IdiomaListener(i));
-            jMenu3.add(menuItemAux);
-        }
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem2.setText(jMenuItem2Text);//Salir
-        jMenuItem2.addActionListener(new CloseListener());
-        jMenu2 = new javax.swing.JMenu();
-        jMenu2.setText(jMenu2Text); //Ayuda
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem5.setText(jMenuItem5Text);
-        jMenuItem5.addActionListener(new AyudaListener(frame));
+        crearMenuBar(frame);
 
-        jMenu1.add(jMenuItem3);
-        jMenu1.add(jMenuItem4);
-        jMenu1.add(jMenu3);
-        jMenu1.add(jMenuItem2);
-        jMenu2.add(jMenuItem5);
-        jMenuBar1.add(jMenu1);
-        jMenuBar1.add(jMenu2);
-
-        frame.setJMenuBar(jMenuBar1);
+        frame.setJMenuBar(menuBar);
 
         frame.add(inicio, BorderLayout.PAGE_START);
 
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private static void crearMenuBar(JFrame frame) {
+        menuBar = new javax.swing.JMenuBar();
+        menuArchivo = new javax.swing.JMenu();
+        menuArchivo.setText(jMenu1Text);//Archivo
+        menuItemAbrir = new javax.swing.JMenuItem();
+        menuItemAbrir.setText(jMenuItem3Text);
+        menuItemAbrir.addActionListener(new AbrirListener(frame));
+        menuItemGuardar = new javax.swing.JMenuItem();
+        menuItemGuardar.setText(jMenuItem4Text);
+        menuItemGuardar.addActionListener(new GuardarListener(frame));
+        menuItemIdioma = new javax.swing.JMenu();
+        menuItemIdioma.setText(jMenu3Text); //Idioma
+        for (int i = 0; i < idiomas.getNumIdiomas(); i++) {
+            JMenuItem menuItemAux = new JMenuItem(idiomas.getIdioma(i).firstElement());
+            menuItemAux.addActionListener(new IdiomaListener(i));
+            menuItemIdioma.add(menuItemAux);
+            menuItemAux.setIcon(new ImageIcon("images/" + idiomas.getIdioma(i).firstElement() + ".png"));
+        }
+        menuItemSalir = new javax.swing.JMenuItem();
+        menuItemSalir.setText(jMenuItem2Text);//Salir
+        menuItemSalir.addActionListener(new CloseListener());
+        menuAyuda = new javax.swing.JMenu();
+        menuAyuda.setText(jMenu2Text); //Ayuda
+        menuItemAyuda = new javax.swing.JMenuItem();
+        menuItemAyuda.setText(jMenuItem5Text);
+        menuItemAyuda.addActionListener(new AyudaListener(frame));
+
+        menuArchivo.add(menuItemAbrir);
+        menuArchivo.add(menuItemGuardar);
+        menuArchivo.add(menuItemIdioma);
+        menuArchivo.add(menuItemSalir);
+        menuAyuda.add(menuItemAyuda);
+        menuBar.add(menuArchivo);
+        menuBar.add(menuAyuda);
     }
 
     static class IdiomaListener implements ActionListener {
@@ -207,13 +213,13 @@ public class IPO_practica_9 {
         jMenuItem5Text = idiomas.getIdioma(cual).get(13);
         textoAyuda = idiomas.getIdioma(cual).get(14);
 
-        jMenu1.setText(jMenu1Text);//Archivo
-        jMenu3.setText(jMenu3Text); //Idioma
-        jMenuItem2.setText(jMenuItem2Text);//Salir
-        jMenu2.setText(jMenu2Text);
-        jMenuItem3.setText(jMenuItem3Text);
-        jMenuItem4.setText(jMenuItem4Text);
-        jMenuItem5.setText(jMenuItem5Text);
+        menuArchivo.setText(jMenu1Text);//Archivo
+        menuItemIdioma.setText(jMenu3Text); //Idioma
+        menuItemSalir.setText(jMenuItem2Text);//Salir
+        menuAyuda.setText(jMenu2Text);
+        menuItemAbrir.setText(jMenuItem3Text);
+        menuItemGuardar.setText(jMenuItem4Text);
+        menuItemAyuda.setText(jMenuItem5Text);
     }
 
     public static void cargarDatos(String ruta) {
