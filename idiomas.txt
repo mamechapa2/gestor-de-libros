@@ -18,7 +18,8 @@ Para añadir un libro haga click en el boton de Nuevo y rellene toda la informac
 Volver
 Guardar
 Libros
-0
+1
+images/portada.jpg
 en
 17
 Archive
@@ -38,4 +39,5 @@ To add a book click the New button and complete the information. \nTo delete a b
 Return
 Save
 Books
-0
+1
+images/cover.jpg

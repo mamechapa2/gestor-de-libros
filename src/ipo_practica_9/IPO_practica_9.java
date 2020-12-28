@@ -84,7 +84,7 @@ public class IPO_practica_9 {
         JFrame frame = new JFrame("Gestor de libros");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(500, 300));
-        inicio = new Inicio(frame, idiomas.getIdioma(0));
+        inicio = new Inicio(frame, idiomas.getIdioma(0), idiomas.getImagenesIdioma(0));
 
         crearMenuBar(frame);
 
@@ -142,7 +142,7 @@ public class IPO_practica_9 {
         }
 
         public void actionPerformed(ActionEvent e) {
-            inicio.setIdioma(idiomas.getIdioma(idioma));
+            inicio.setIdioma(idiomas.getIdioma(idioma), idiomas.getImagenesIdioma(idioma));
             cambiarIdioma(idioma);
         }
     }
@@ -226,5 +226,4 @@ public class IPO_practica_9 {
     public static void cargarDatos(String ruta) {
         inicio.cargarDatos(ruta);
     }
-
 }

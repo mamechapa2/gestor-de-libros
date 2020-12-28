@@ -41,16 +41,18 @@ public class Inicio extends javax.swing.JPanel {
 
     private Vector<Libro> vectorLibros;
     private Libro libroAnterior;
+    private Vector<ImageIcon> imagenes;
 
     /**
      * Creates new form Inicio
      */
-    public Inicio(JFrame framePadre, Vector<String> idioma) {
+    public Inicio(JFrame framePadre, Vector<String> idioma, Vector<ImageIcon> imagenes) {
         initComponents();
 
         this.framePadre = framePadre;
         this.vectorLibros = new Vector<>();
         this.idioma = idioma;
+        this.imagenes = imagenes;
         cambiarIdioma();
 
         this.listModel = new DefaultListModel();
@@ -98,8 +100,9 @@ public class Inicio extends javax.swing.JPanel {
         jLabelLibros.setText(idioma.get(17));
     }
 
-    public void setIdioma(Vector<String> idioma) {
+    public void setIdioma(Vector<String> idioma, Vector<ImageIcon> imagenes) {
         this.idioma = idioma;
+        this.imagenes = imagenes;
         cambiarIdioma();
     }
 
@@ -163,7 +166,7 @@ public class Inicio extends javax.swing.JPanel {
 
         public void actionPerformed(ActionEvent e) {
             Libro libro = new Libro();
-            nuevo = new Nuevo(inicio, libro, idioma);
+            nuevo = new Nuevo(inicio, libro, idioma, imagenes);
 
             framePadre.add(nuevo, BorderLayout.PAGE_START);
             framePadre.pack();
