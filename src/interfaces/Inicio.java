@@ -93,6 +93,7 @@ public class Inicio extends javax.swing.JPanel {
     public void cambiarIdioma() {
         addButton.setText(idioma.get(5));
         deleteButton.setText(idioma.get(6));
+        jLabelLibros.setText(idioma.get(17));
     }
 
     public void setIdioma(Vector<String> idioma) {
