@@ -8,6 +8,7 @@ package ipo_practica_9;
 import utils.Idiomas;
 import interfaces.Inicio;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
