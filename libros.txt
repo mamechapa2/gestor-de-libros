@@ -1,4 +1,5 @@
-La chica de nieve;Javier Castillo;Thriller;2020;images/chicanieve.jpg;
-Marina;Carlos Ruiz Zafon;Thriller;2020;images/marina.jpg;
 La pareja de al lado;Shari Lapena;Thriller;2020;images/pareja.jpg;
 Tierra;Eloy Moreno;Thriller;2020;images/tierra.jpg;
+Marina;Carlos Ruiz Zafon;Thriller;2020;images/marina.jpg;
+qweqweqweq;;;;C:\Users\mamechapa\Desktop\gestor-de-libros\images\chicanieve.jpg;
+invisible;;;;C:\Users\mamechapa\Desktop\invi.jpg;
