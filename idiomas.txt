@@ -1,6 +1,6 @@
 2
 es
-16
+17
 Archivo
 Idioma
 Salir
@@ -17,9 +17,11 @@ Ayuda
 Para añadir un libro haga click en el boton de Nuevo y rellene toda la informacion del libro.\nPara eliminar un libro haga click en el boton de Eliminar.\nSi quiere editar o visualizar la informacion completa de un libro \n  haga doble click en el libro que desee consultar y se le mostrara toda la informacion del libro, la cual podra editar.\n"
 Volver
 Guardar
-0
+Libros
+1
+images/portada.jpg
 en
-16
+17
 Archive
 Language
 Exit
@@ -36,4 +38,6 @@ Help
 To add a book click the New button and complete the information. \nTo delete a book click the Delete button.\nIf you want to edit or read the full information of the book, you can double click on it.\n
 Return
 Save
-0
+Books
+1
+images/cover.jpg

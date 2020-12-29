@@ -1,4 +1,4 @@
-Marina;Carlos Ruiz Zafon;pf xd;nosexd;
-La pareja de al lado;Shari Lapena;ajajjjajj;xd;
-Tierra;Eloy Moreno;Thriller;2020;
-La chica de nieve9;Javier Castillo;Thriller;2020;
+La chica de nieve;Javier Castillo;Thriller;2020;images/chicanieve.jpg;
+Marina;Carlos Ruiz Zafon;Thriller;2020;images/marina.jpg;
+La pareja de al lado;Shari Lapena;Thriller;2020;images/pareja.jpg;
+Tierra;Eloy Moreno;Thriller;2020;images/tierra.jpg;

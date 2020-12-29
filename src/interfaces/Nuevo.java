@@ -6,10 +6,18 @@
 package interfaces;
 
 import interfaces.Inicio;
+import static ipo_practica_9.IPO_practica_9.cargarDatos;
 import ipo_practica_9.Libro;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Vector;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -19,17 +27,19 @@ public class Nuevo extends javax.swing.JPanel {
 
     private Inicio panelAnterior;
     private Libro libro;
-    
+
     private Vector<String> idioma;
+    private Vector<ImageIcon> imagenes;
 
     /**
      * Creates new form Edicion
      */
-    public Nuevo(Inicio panelAnterior, Libro libro, Vector<String> idioma) {
+    public Nuevo(Inicio panelAnterior, Libro libro, Vector<String> idioma, Vector<ImageIcon> imagenes) {
         initComponents();
         this.panelAnterior = panelAnterior;
         this.libro = libro;
         this.idioma = idioma;
+        this.imagenes = imagenes;
         cambiarIdioma();
 
         jTextFieldNombre.setText("");
@@ -39,6 +49,7 @@ public class Nuevo extends javax.swing.JPanel {
 
         saveButton.addActionListener(new SaveListener(this));
         volverButton.addActionListener(new VolverListener(this));
+        addImage.addActionListener(new AddImageListener(this));
     }
 
     public void guardarLibro() {
@@ -48,14 +59,19 @@ public class Nuevo extends javax.swing.JPanel {
         libro.setAño(jTextFieldAnio.getText());
         panelAnterior.guardarLibro(libro);
     }
-    
-    public void cambiarIdioma(){
+
+    public void cambiarIdioma() {
         jLabelNombre.setText(idioma.get(7));
         jLabelAutor.setText(idioma.get(8));
         jLabelGenero.setText(idioma.get(9));
         jLabelAnio.setText(idioma.get(10));
         saveButton.setText(idioma.get(16));
         volverButton.setText(idioma.get(15));
+        imagenLibro.setIcon(imagenes.get(0));
+    }
+
+    public void setImagenLibro(String ruta) {
+        libro.setRutaImagen(ruta);
     }
 
     /**
@@ -77,6 +93,8 @@ public class Nuevo extends javax.swing.JPanel {
         jTextFieldAnio = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         volverButton = new javax.swing.JButton();
+        imagenLibro = new javax.swing.JLabel();
+        addImage = new javax.swing.JButton();
 
         jTextFieldNombre.setText("jTextField1");
 
@@ -98,6 +116,8 @@ public class Nuevo extends javax.swing.JPanel {
 
         volverButton.setText("Volver");
 
+        addImage.setText("Añadir imagen");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,23 +125,29 @@ public class Nuevo extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldNombre)
-                    .addComponent(jTextFieldAutor)
-                    .addComponent(jTextFieldGenero)
-                    .addComponent(jTextFieldAnio)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNombre)
-                            .addComponent(jLabelAutor)
-                            .addComponent(jLabelGenero)
-                            .addComponent(jLabelAnio))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 248, Short.MAX_VALUE)
                         .addComponent(volverButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton)))
-                .addContainerGap())
+                        .addComponent(saveButton)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextFieldAnio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(jTextFieldGenero, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldAutor, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelAutor, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelGenero, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelAnio, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imagenLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(addImage)))
+                        .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,29 +155,37 @@ public class Nuevo extends javax.swing.JPanel {
                 .addGap(13, 13, 13)
                 .addComponent(jLabelNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelAutor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelGenero)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(imagenLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelAutor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelGenero)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelAnio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveButton)
-                    .addComponent(volverButton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelAnio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(saveButton)
+                            .addComponent(volverButton)))
+                    .addComponent(addImage))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addImage;
+    private javax.swing.JLabel imagenLibro;
     private javax.swing.JLabel jLabelAnio;
     private javax.swing.JLabel jLabelAutor;
     private javax.swing.JLabel jLabelGenero;
@@ -190,6 +224,36 @@ public class Nuevo extends javax.swing.JPanel {
         public void actionPerformed(ActionEvent e) {
             panelEdicion.setVisible(false);
             panelAnterior.setVisible(true);
+        }
+    }
+
+    static class AddImageListener implements ActionListener {
+
+        private Nuevo nuevo;
+
+        public AddImageListener(Nuevo nuevo) {
+            this.nuevo = nuevo;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser selectorArchivos = new JFileChooser();
+            selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    ".jpg", "jpg");
+            selectorArchivos.setFileFilter(filter);
+            int resultado = selectorArchivos.showOpenDialog(null);
+
+            if (resultado == JFileChooser.APPROVE_OPTION) {
+                File archivo = selectorArchivos.getSelectedFile();
+                System.out.println("Fichero cargado: " + archivo.getAbsolutePath());
+                cargarImagen(archivo.getAbsolutePath());
+            }
+        }
+
+        private void cargarImagen(String ruta) {
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(ruta).getImage().getScaledInstance(82, 125, Image.SCALE_DEFAULT));
+            nuevo.imagenLibro.setIcon(imageIcon);
+            nuevo.setImagenLibro(ruta);
         }
     }
 }

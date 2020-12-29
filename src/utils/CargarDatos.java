@@ -29,7 +29,14 @@ public class CargarDatos {
         while (scn.hasNext()) {
             String linea = scn.nextLine();
             String[] split = linea.split(";");
-            Libro nuevoLibro = new Libro(split[0], split[1], split[2], split[3]);
+            String[] aux = new String[5];
+            for (String string : aux) {
+                string = " ";
+            }
+            for (int i = 0; i < split.length; i++) {
+                aux[i] = split[i];
+            }
+            Libro nuevoLibro = new Libro(aux[0], aux[1], aux[2], aux[3], aux[4]);
             datos.add(nuevoLibro);
         }
     }

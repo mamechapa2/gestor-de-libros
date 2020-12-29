@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,6 +19,7 @@ import java.util.Vector;
 public class Idiomas {
     
     private Vector<Vector<String>> idiomas;
+    private Vector<Vector<ImageIcon>> imagenes;
     private int numIdiomas;
 
     public Idiomas(String fichero) throws FileNotFoundException, IOException {
@@ -29,6 +31,7 @@ public class Idiomas {
         
         numIdiomas = Integer.parseInt(b.readLine());
         idiomas = new Vector<>();
+        imagenes = new Vector<>();
         for (int i = 0; i < numIdiomas; i++) {
             Vector<String> idioma = new Vector<>();
             idioma.add(b.readLine());
@@ -37,12 +40,14 @@ public class Idiomas {
                 idioma.add(b.readLine());
             }
             
+            Vector<ImageIcon> imagenesAux = new Vector<>();
             int numImagenes = Integer.parseInt(b.readLine());
             for (int j = 0; j < numImagenes; j++) {
-                //Guardar imagenes
+                imagenesAux.add(new ImageIcon(b.readLine()));
             }
             
             idiomas.add(idioma);
+            imagenes.add(imagenesAux);
         }
     }
 
@@ -52,6 +57,14 @@ public class Idiomas {
     
     public Vector<String> getIdioma(int cual) {
         return idiomas.get(cual);
+    }
+    
+    public Vector<Vector<ImageIcon>> getImagenes() {
+        return imagenes;
+    }
+    
+    public Vector<ImageIcon> getImagenesIdioma(int cual) {
+        return imagenes.get(cual);
     }
     
     public int getNumIdiomas() {

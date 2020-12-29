@@ -35,7 +35,7 @@ public class GuardarDatos {
             pw = new PrintWriter(fichero);
 
             for (Libro libro : libros) {
-                pw.write(libro.getNombre() + ";" + libro.getAutor() + ";" + libro.getGenero() + ";" + libro.getAño() + ";\n");
+                pw.write(libro.getNombre() + ";" + libro.getAutor() + ";" + libro.getGenero() + ";" + libro.getAño() +  ";" + libro.getRutaImagen() + ";\n");
             }
             fichero.close();
         } catch (IOException e) {

@@ -20,6 +20,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 
@@ -39,16 +41,18 @@ public class Inicio extends javax.swing.JPanel {
 
     private Vector<Libro> vectorLibros;
     private Libro libroAnterior;
+    private Vector<ImageIcon> imagenes;
 
     /**
      * Creates new form Inicio
      */
-    public Inicio(JFrame framePadre, Vector<String> idioma) {
+    public Inicio(JFrame framePadre, Vector<String> idioma, Vector<ImageIcon> imagenes) {
         initComponents();
 
         this.framePadre = framePadre;
         this.vectorLibros = new Vector<>();
         this.idioma = idioma;
+        this.imagenes = imagenes;
         cambiarIdioma();
 
         this.listModel = new DefaultListModel();
@@ -61,19 +65,19 @@ public class Inicio extends javax.swing.JPanel {
         setMinimumSize(new Dimension(500, 400));
         addButton.addActionListener(new NuevoListener(this));
         deleteButton.addActionListener(new EliminarListener(this));
-//        Icon addIcon = new ImageIcon("add.png");
-//        Icon deleteIcon = new ImageIcon("delete.png");
-//        addButton.setIcon(addIcon);
-//        deleteButton.setIcon(deleteIcon);
+        Icon addIcon = new ImageIcon("images/add.png");
+        Icon deleteIcon = new ImageIcon("images/delete.png");
+        addButton.setIcon(addIcon);
+        deleteButton.setIcon(deleteIcon);
 
         setVisible(true);
     }
 
     private void addLibrosEjemplo() {
-        vectorLibros.add(new Libro("La chica de nieve", "Javier Castillo", "Thriller", "2020"));
-        vectorLibros.add(new Libro("Marina", "Carlos Ruiz Zafon", "pf xd", "nosexd"));
-        vectorLibros.add(new Libro("La pareja de al lado", "Shari Lapena", "ajajjjajj", "xd"));
-        vectorLibros.add(new Libro("Tierra", "Eloy Moreno", "Thriller", "2020"));
+        vectorLibros.add(new Libro("La chica de nieve", "Javier Castillo", "Thriller", "2020", "images/chicanieve.jpg"));
+        vectorLibros.add(new Libro("Marina", "Carlos Ruiz Zafon", "Thriller", "2020", "images/marina.jpg"));
+        vectorLibros.add(new Libro("La pareja de al lado", "Shari Lapena", "Thriller", "2020", "images/pareja.jpg"));
+        vectorLibros.add(new Libro("Tierra", "Eloy Moreno", "Thriller", "2020", "images/tierra.jpg"));
 
         for (Libro libro : vectorLibros) {
             listModel.addElement(libro.getNombre() + " | " + libro.getAutor());
@@ -93,10 +97,12 @@ public class Inicio extends javax.swing.JPanel {
     public void cambiarIdioma() {
         addButton.setText(idioma.get(5));
         deleteButton.setText(idioma.get(6));
+        jLabelLibros.setText(idioma.get(17));
     }
 
-    public void setIdioma(Vector<String> idioma) {
+    public void setIdioma(Vector<String> idioma, Vector<ImageIcon> imagenes) {
         this.idioma = idioma;
+        this.imagenes = imagenes;
         cambiarIdioma();
     }
 
@@ -137,7 +143,7 @@ public class Inicio extends javax.swing.JPanel {
                 list.setSelectedIndex(elementoSeleccionado);
                 list.ensureIndexIsVisible(elementoSeleccionado);
 
-                edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado), idioma);
+                edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado), idioma, imagenes);
                 libroAnterior = vectorLibros.get(elementoSeleccionado);
                 vectorLibros.remove(elementoSeleccionado);
                 listModel.remove(elementoSeleccionado);
@@ -160,7 +166,7 @@ public class Inicio extends javax.swing.JPanel {
 
         public void actionPerformed(ActionEvent e) {
             Libro libro = new Libro();
-            nuevo = new Nuevo(inicio, libro, idioma);
+            nuevo = new Nuevo(inicio, libro, idioma, imagenes);
 
             framePadre.add(nuevo, BorderLayout.PAGE_START);
             framePadre.pack();
@@ -212,12 +218,16 @@ public class Inicio extends javax.swing.JPanel {
         jScrollPane1.setViewportView(list);
 
         addButton.setText("Nuevo");
+        addButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         deleteButton.setText("Eliminar");
+        deleteButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelLibros.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabelLibros.setText("Libros");
 
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -233,10 +243,10 @@ public class Inicio extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 212, Short.MAX_VALUE)))
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 165, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -246,9 +256,8 @@ public class Inicio extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelLibros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                 .addContainerGap())
