@@ -74,10 +74,10 @@ public class Inicio extends javax.swing.JPanel {
     }
 
     private void addLibrosEjemplo() {
-        vectorLibros.add(new Libro("La chica de nieve", "Javier Castillo", "Thriller", "2020"));
-        vectorLibros.add(new Libro("Marina", "Carlos Ruiz Zafon", "pf xd", "nosexd"));
-        vectorLibros.add(new Libro("La pareja de al lado", "Shari Lapena", "ajajjjajj", "xd"));
-        vectorLibros.add(new Libro("Tierra", "Eloy Moreno", "Thriller", "2020"));
+        vectorLibros.add(new Libro("La chica de nieve", "Javier Castillo", "Thriller", "2020", "images/chicanieve.jpg"));
+        vectorLibros.add(new Libro("Marina", "Carlos Ruiz Zafon", "Thriller", "2020", "images/marina.jpg"));
+        vectorLibros.add(new Libro("La pareja de al lado", "Shari Lapena", "Thriller", "2020", "images/pareja.jpg"));
+        vectorLibros.add(new Libro("Tierra", "Eloy Moreno", "Thriller", "2020", "images/tierra.jpg"));
 
         for (Libro libro : vectorLibros) {
             listModel.addElement(libro.getNombre() + " | " + libro.getAutor());
@@ -143,7 +143,7 @@ public class Inicio extends javax.swing.JPanel {
                 list.setSelectedIndex(elementoSeleccionado);
                 list.ensureIndexIsVisible(elementoSeleccionado);
 
-                edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado), idioma);
+                edicion = new Edicion(inicio, vectorLibros.get(elementoSeleccionado), idioma, imagenes);
                 libroAnterior = vectorLibros.get(elementoSeleccionado);
                 vectorLibros.remove(elementoSeleccionado);
                 listModel.remove(elementoSeleccionado);
