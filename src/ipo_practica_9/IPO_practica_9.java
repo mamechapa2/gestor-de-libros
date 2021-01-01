@@ -8,7 +8,6 @@ package ipo_practica_9;
 import utils.Idiomas;
 import interfaces.Inicio;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -193,7 +192,12 @@ public class IPO_practica_9 {
         }
 
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(framePadre, textoAyuda);
+            String split[] = textoAyuda.split(";");
+            String aux = "";
+            for (String string : split) {
+                aux += string + "\n";
+            }
+            JOptionPane.showMessageDialog(framePadre, aux);
         }
     }
 

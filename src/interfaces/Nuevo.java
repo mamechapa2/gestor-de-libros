@@ -68,6 +68,7 @@ public class Nuevo extends javax.swing.JPanel {
         saveButton.setText(idioma.get(16));
         volverButton.setText(idioma.get(15));
         imagenLibro.setIcon(imagenes.get(0));
+        addImage.setText(idioma.get(18));
     }
 
     public void setImagenLibro(String ruta) {

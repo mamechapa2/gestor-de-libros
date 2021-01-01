@@ -71,7 +71,8 @@ public class Edicion extends javax.swing.JPanel {
         jLabelGenero.setText(idioma.get(9));
         jLabelAnio.setText(idioma.get(10));
         saveButton.setText(idioma.get(16));
-        volverButton.setText(idioma.get(15));
+        volverButton.setText(idioma.get(15));        
+        addImage.setText(idioma.get(18));
     }
 
     public void setImagenLibro(String ruta) {
